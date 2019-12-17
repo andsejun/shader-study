@@ -19,3 +19,8 @@ Fragment Shader text
     thread is working on.
     In this case we don't call it uniform because it will be different 
     from thread to thread, instead gl_FragCoord is called a varying.
+
+[Running your shader]
+https://github.com/patriciogonzalezvivo/thebookofshaders/tree/master/04
+
+[Algorithmic drawing]
