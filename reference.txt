@@ -1,5 +1,7 @@
 Fragment Shader text
 -
+
+
 [Uniform]
     uniform: CPU에서 GPU로 넘어가는 데이터, 하드웨어 구조상 GPU thread에선 
     읽을 수만 있으며(read-only), 그 값은 모두 동일하다.
@@ -12,6 +14,7 @@ Fragment Shader text
     acos(), atan(), pow(), exp(), log(), sqrt(), abs(), sign(), floor(), 
     ceil(), fract(), mod(), min(), max() and clamp().
 
+
 [gl_FragCoord, gl_FragColor]
     In the same way GLSL gives us a default output, vec4 gl_FragColor, 
     it also gives us a default input, vec4 gl_FragCoord, which holds the 
@@ -20,7 +23,25 @@ Fragment Shader text
     In this case we don't call it uniform because it will be different 
     from thread to thread, instead gl_FragCoord is called a varying.
 
+
 [Running your shader]
 https://github.com/patriciogonzalezvivo/thebookofshaders/tree/master/04
 
+
 [Algorithmic drawing]
+
+
+[Color]
+    vec4 vector;
+    vector[0] = vector.r = vector.x = vector.s;
+    vector[1] = vector.g = vector.y = vector.t;
+    vector[2] = vector.b = vector.z = vector.p;
+    vector[3] = vector.a = vector.w = vector.q;
+
+    삼항 연산자:
+    (대입할 부분) = (조건) ? (참) : (거짓)
+
+    qualifier:
+    int newFunction(in vec4 aVec4,      // read-only
+                out vec3 aVec3,     // write-only
+                inout int aInt);    // read-write
