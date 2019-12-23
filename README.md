@@ -19,3 +19,5 @@ Editor : http://editor.thebookofshaders.com/
 2019.12.18(Algorithmic drawing-Advance shaping function ~ Color-HSB)
 
 2019.12.20(Color-HSB ~ Color-end)
+
+2019.12.23(Shape ~ Circle - depth of field)
