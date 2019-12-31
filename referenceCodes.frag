@@ -1,3 +1,8 @@
+//st setting, range between -1 and 1
+    vec2 st = gl_FragCoord.xy/u_resolution;
+    st.x *= u_resolution.x/u_resolution.y;
+    st = (st-vec2(0.5))*2.0;
+
 //plot
 float plot(vec2 st, float pct){
     return smoothstep( pct - 0.02, pct, st.y) -
@@ -45,9 +50,39 @@ float rect(in vec2 st, in vec2 center, in vec2 size, in float feather)
 
 //to draw circle
 float circle(in vec2 st, in vec2 center, in float radius, in float feather)
-{
-    float length = distance(center, st);
+{	
+    //float length = distance(center, st);
+    //float value = 1.0 - smoothstep(radius - feather/2.0, 
+    //                               radius + feather/2.0, length);
+    
+    //cheat way. dot funtion is more cheap because dot function doesn't use root.
+    vec2 dist = st - center;
     float value = 1.0 - smoothstep(radius - feather/2.0, 
-                                   radius + feather/2.0, length);
+                                   radius + feather/2.0, dot(dist,dist)*4.0);
+    
     return value;
+}
+
+//trigonometry graphs
+    y = cos(x*3.);
+    y = abs(cos(x*3.));
+    y = abs(cos(x*2.5))*0.5+0.3;
+    y = abs(cos(x*12.)*sin(x*3.))*.8+.1;
+    y = smoothstep(-.5,1., cos(x*10.))*0.2+0.5;
+
+//trigonometry graphs with atan
+void main()
+{
+    //st setting
+    float radiusScale = 1.0;
+    float radius = length(st)*radiusScale;
+    float angleScale = 3.0;
+    float angle = atan(st.y, st.x)*angleScale;
+    
+    float color = step(radius, cos(angle));
+    //color = step(radius, abs(cos(angle)));
+    //color = step(radius, abs(cos(angle))*.5 + 0.2);
+    //color = step(radius, abs(cos(angle)*sin(angle/1.5)));
+    //color = step(radius, abs(cos(angle)*sin(angle/1.5))*0.5 + 0.5);    
+    gl_FragColor = vec4(vec3(color), 1.0);
 }
