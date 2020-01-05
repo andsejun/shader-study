@@ -3,6 +3,11 @@
     st.x *= u_resolution.x/u_resolution.y;
     st = (st-vec2(0.5))*2.0;
 
+//define PI & TWO_PI
+    #define PI 3.14159265359
+    #define TWO_PI 6.28318530718
+
+
 //plot
 float plot(vec2 st, float pct){
     return smoothstep( pct - 0.02, pct, st.y) -
@@ -48,6 +53,11 @@ float rect(in vec2 st, in vec2 center, in vec2 size, in float feather)
     return value.x * value.y;
 }
 
+//to draw rect2
+    vec2 r = abs(center.xy);
+    float s = step(.5,max(r.x,r.y));
+    f = vec4(vec3(s),1.)
+
 //to draw circle
 float circle(in vec2 st, in vec2 center, in float radius, in float feather)
 {	
@@ -86,3 +96,12 @@ void main()
     //color = step(radius, abs(cos(angle)*sin(angle/1.5))*0.5 + 0.5);    
     gl_FragColor = vec4(vec3(color), 1.0);
 }
+
+//to draw N-Polygon
+    int N=7;
+    float a = tan(nSt.x, nSt.y) + 0.2;
+    float b = TWO_PI / float(N);
+    float color = vec3(smoothstep(0.5, 0.51, cos(floor(0.5 + a/b) * b - a) 
+                       * length(nSt.xy)))
+    gl_FragColor = vec4(color, 1.0);
+

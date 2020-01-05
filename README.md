@@ -20,6 +20,8 @@ Editor : http://editor.thebookofshaders.com/
 
 2019.12.20(Color-HSB ~ Color-end)
 
-2019.12.23(Shape ~ Shape - depth of field)
+2019.12.23(Shape ~ Shape-depth of field)
 
-2019.12.31(Shape - depth of field ~ Shape - polar shapes)
+2019.12.31(Shape-depth of field ~ Shape-polar shapes)
+
+2020.01.05(~ Shape-end)
