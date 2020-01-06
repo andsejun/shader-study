@@ -25,3 +25,5 @@ Editor : http://editor.thebookofshaders.com/
 2019.12.31(Shape-depth of field ~ Shape-polar shapes)
 
 2020.01.05(~ Shape-end)
+
+2020.01.06(~ matrices-2D TRS)

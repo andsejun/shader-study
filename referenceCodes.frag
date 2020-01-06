@@ -105,3 +105,21 @@ void main()
                        * length(nSt.xy)))
     gl_FragColor = vec4(color, 1.0);
 
+//2D TRS
+    mat3 translate(vec2 t){
+        return mat3(1.0, 0.0, 0.0, // col1
+                    0.0, 1.0, 0.0, // col2
+                    t.x, t.y, 1.0); // col3
+    }
+
+    mat3 scale(vec2 s){
+        return mat3(s.x, 0.0, 0.0, // col1
+                    0.0, s.y, 0.0, // col2
+                    0.0, 0.0, 1.0); // col3
+    }
+
+    mat3 rotate(float angle){
+        return mat3(cos(angle), sin(angle), 0.0, // col1
+                    -sin(angle), cos(angle), 0.0, // col2
+                    0.0, 0.0, 1.0); // col3
+    }
