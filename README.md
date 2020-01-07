@@ -27,3 +27,5 @@ Editor : http://editor.thebookofshaders.com/
 2020.01.05(~ Shape-end)
 
 2020.01.06(~ matrices-2D TRS)
+
+2020.01.07(~ patterns-Apply matrices inside patterns)
