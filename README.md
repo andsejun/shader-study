@@ -10,22 +10,24 @@ Glossary : https://thebookofshaders.com/glossary/
 
 Editor : http://editor.thebookofshaders.com/
 
-2019.12.10(About this book ~ "Hello World!")
+2019.12.10(~ "Hello World!")
 
-2019.12.11(Uniform)
+2019.12.11(~ uniform)
 
-2019.12.17(Algorithmic drawing-Advance shaping function)
+2019.12.17(~ algorithmic drawing-advance shaping function)
 
-2019.12.18(Algorithmic drawing-Advance shaping function ~ Color-HSB)
+2019.12.18(~ color-HSB)
 
-2019.12.20(Color-HSB ~ Color-end)
+2019.12.20(~ color-end)
 
-2019.12.23(Shape ~ Shape-depth of field)
+2019.12.23(~ shape-depth of field)
 
-2019.12.31(Shape-depth of field ~ Shape-polar shapes)
+2019.12.31(~ shape-polar shapes)
 
-2020.01.05(~ Shape-end)
+2020.01.05(~ shape-end)
 
 2020.01.06(~ matrices-2D TRS)
 
-2020.01.07(~ patterns-Apply matrices inside patterns)
+2020.01.07(~ patterns-apply matrices inside patterns)
+
+2020.01.12(~ patters-offset patterns)

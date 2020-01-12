@@ -41,16 +41,15 @@ vec3 hsb2rgb( in vec3 c ){
 }
 
 //to draw rect
-float rect(in vec2 st, in vec2 center, in vec2 size, in float feather)
-{
-    //vec2 bottomleft = step(center-size/2., st);
-    vec2 bottomleft = smoothstep(center - size/2.0 - feather/2.0,
-                                 center - size/2.0 + feather/2.0, st);
-    //vec2 topright = 1.0 - step(center+size/2., st);
-    vec2 topright = 1.0 - smoothstep(center + size/2.0 - feather/2.0, 
-                                     center + size/2.0 + feather/2.0, st);
- 	vec2 value = bottomleft * topright;
-    return value.x * value.y;
+float rect(vec2 st, vec2 center, float size, float feather)
+{	
+    //left down
+    vec2 val = smoothstep(center - size/2.0 - feather/2.0, 
+						  center - size/2.0 + feather/2.0, st);
+    //right up
+    val *= 1.0 - smoothstep(center + size/2.0 - feather/2.0, 
+							center + size/2.0 + feather/2.0, st);
+    return val.x * val.y;    
 }
 
 //to draw rect2
@@ -134,3 +133,13 @@ mat3 yuv2rgb = mat3(1.0, 0.0, 1.13983,
 mat3 rgb2yuv = mat3(0.2126, 0.7152, 0.0722,
                     -0.09991, -0.33609, 0.43600,
                     0.615, -0.5586, -0.05639);
+
+// Brick tile, offset in every odd row
+vec2 brickTile(vec2 st, float zoom){
+    vec2 val = st * zoom;
+    //this is more fast because inner funtion in GLSL is suitable for GPU architecture
+    float offset = step(1.0, mod(val.y, 2.0)) * 0.5;
+    //float offset = mod(val.y, 2.0) < 1.0 ? 0.0 : 1.0 * 0.5;
+    val.x += offset;
+    return fract(val);
+    }
