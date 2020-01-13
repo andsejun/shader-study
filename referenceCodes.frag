@@ -143,3 +143,24 @@ vec2 brickTile(vec2 st, float zoom){
     val.x += offset;
     return fract(val);
     }
+
+// 2*2 grid Rotation
+vec2 gridRotation(vec2 st){
+    vec2 val = st*2.0;
+    float index = 0.0;
+    index += step(1., mod(val.x,2.0));
+    index += step(1., mod(val.y,2.0))*2.0;
+    //      |
+    //  2   |   3
+    //      |
+    //--------------
+    //      |
+    //  0   |   1
+    //      |
+    val = fract(val);
+    if(index == 0.0) val = rotate2D(val, 0.0);
+	if(index == 1.0) val = rotate2D(val, PI * 0.5);
+    if(index == 2.0) val = rotate2D(val, PI * 1.0);
+    if(index == 3.0) val = rotate2D(val, PI * 1.5);
+    return val;
+    }

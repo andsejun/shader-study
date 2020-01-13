@@ -31,3 +31,5 @@ Editor : http://editor.thebookofshaders.com/
 2020.01.07(~ patterns-apply matrices inside patterns)
 
 2020.01.12(~ patters-offset patterns)
+
+2020.01.13(~ patters-end)
