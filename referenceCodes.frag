@@ -164,3 +164,18 @@ vec2 gridRotation(vec2 st){
     if(index == 3.0) val = rotate2D(val, PI * 1.5);
     return val;
     }
+
+// random 1-demnsion
+    // to make a random graph, but this is not ultimate random num
+    // Also we can use chaotic by using pow(random(x), num), this is close to 0.0
+    // or using sqrt(random(x), num), this is close to 1.0
+    // Also this is like a pseudo-random. It is always return same value in response of x.
+    y = fract(sin(x)*scale);
+
+// random 2-dimension
+float random (vec2 st) {
+    // rutern 2-dimension vector to random num, 0.0 to 1.0
+    return fract(sin(dot(st.xy,
+                         vec2(12.9898,78.233)))*
+        43734.5453123);
+    }    

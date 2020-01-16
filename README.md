@@ -33,3 +33,5 @@ Editor : http://editor.thebookofshaders.com/
 2020.01.12(~ patters-offset patterns)
 
 2020.01.13(~ patters-end)
+
+2020.01.16(~ random-using the chaos)
