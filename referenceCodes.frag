@@ -178,4 +178,11 @@ float random (vec2 st) {
     return fract(sin(dot(st.xy,
                          vec2(12.9898,78.233)))*
         43734.5453123);
-    }    
+    }
+
+//1-dimensional noise graph
+float i = floor(x);
+float f = fract(x);
+float u = f * f * (3.0 - 2.0 * f); // this is custom cubic curve
+y = mix(rand(i), rand(i + 1.0), u);
+// y = mix(rand(i), rand(i + 1.0), smoothstep(0.0, 1.0, f));
