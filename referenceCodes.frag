@@ -180,9 +180,23 @@ float random (vec2 st) {
         43734.5453123);
     }
 
-//1-dimensional noise graph
-float i = floor(x);
-float f = fract(x);
-float u = f * f * (3.0 - 2.0 * f); // this is custom cubic curve
-y = mix(rand(i), rand(i + 1.0), u);
-// y = mix(rand(i), rand(i + 1.0), smoothstep(0.0, 1.0, f));
+//1-dimensional noise 
+    float i = floor(x);
+    float f = fract(x);
+    float u = f * f * (3.0 - 2.0 * f); // this is custom cubic curve
+    y = mix(rand(i), rand(i + 1.0), u);
+    // y = mix(rand(i), rand(i + 1.0), smoothstep(0.0, 1.0, f));
+
+//2-dimensional noise
+float noise(vec2 st){
+    vec2 iPos = floor(st);
+    vec2 fPos = fract(st);
+    float a = random(iPos);
+    float b = random(vec2(iPos.x + 1.0, iPos.y));
+    float c = random(vec2(iPos.x, iPos.y + 1.0));
+    float d = random(vec2(iPos.x + 1.0, iPos.y + 1.0));
+    vec2 u = fPos * fPos * (3.0 - 2.0 * fPos);
+    //this is same
+    return mix(mix(a, b, u.x), mix(c, d, u.x), u.y);
+    //return mix(a, b, u.x) + (c - a)*(1.0 - u.x)*u.y + (d - b)*u.x*u.y;
+    }
