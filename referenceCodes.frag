@@ -97,7 +97,7 @@ void main()
 }
 
 //to draw N-Polygon
-    int N=7;
+    int N = 7;
     float a = tan(nSt.x, nSt.y) + 0.2;
     float b = TWO_PI / float(N);
     float color = vec3(smoothstep(0.5, 0.51, cos(floor(0.5 + a/b) * b - a) 
@@ -172,31 +172,58 @@ vec2 gridRotation(vec2 st){
     // Also this is like a pseudo-random. It is always return same value in response of x.
     y = fract(sin(x)*scale);
 
-// random 2-dimension
+// random 2-dimension(0.0 ~ 1.0)
 float random (vec2 st) {
     // rutern 2-dimension vector to random num, 0.0 to 1.0
     return fract(sin(dot(st.xy,
-                         vec2(12.9898,78.233)))*
-        43734.5453123);
+                         vec2(12.9898,78.233)))*43734.5453123);
     }
 
-//1-dimensional noise 
+//1-dimensional noise(0.0 ~ 1.0)
     float i = floor(x);
     float f = fract(x);
     float u = f * f * (3.0 - 2.0 * f); // this is custom cubic curve
     y = mix(rand(i), rand(i + 1.0), u);
     // y = mix(rand(i), rand(i + 1.0), smoothstep(0.0, 1.0, f));
 
-//2-dimensional noise
-float noise(vec2 st){
+//2-dimensional value noise(0.0 ~ 1.0)
+float valueNoise(vec2 st){
     vec2 iPos = floor(st);
     vec2 fPos = fract(st);
+
     float a = random(iPos);
     float b = random(vec2(iPos.x + 1.0, iPos.y));
     float c = random(vec2(iPos.x, iPos.y + 1.0));
     float d = random(vec2(iPos.x + 1.0, iPos.y + 1.0));
+
     vec2 u = fPos * fPos * (3.0 - 2.0 * fPos);
     //this is same
     return mix(mix(a, b, u.x), mix(c, d, u.x), u.y);
     //return mix(a, b, u.x) + (c - a)*(1.0 - u.x)*u.y + (d - b)*u.x*u.y;
+    }
+
+//2-dimensional random(-1.0 ~ 1.0)
+vec2 random2D(vec2 st){
+    st = vec2( dot(st,vec2(127.1,311.7)),
+               dot(st,vec2(269.5,183.3)) );
+    return -1.0 + 2.0*fract(sin(st)*43758.5453123);
+	}
+
+//2-dimensional gradient noise(-1.0 ~ 1.0)
+float gradientNoise(vec2 st){
+    vec2 iPos = floor(st);
+    vec2 fPos = fract(st);
+
+    vec2 a = vec2(0.0, 0.0);
+	vec2 b = vec2(1.0, 0.0);
+    vec2 c = vec2(0.0, 1.0);
+    vec2 d = vec2(1.0, 1.0);
+    
+    vec2 u = fPos * fPos * (3.0 - 2.0 * fPos);
+
+    return mix(mix(dot(random2D(iPos + a), fPos - a),
+                   dot(random2D(iPos + b), fPos - b), u.x),
+               mix(dot(random2D(iPos + c), fPos - c),
+                   dot(random2D(iPos + d), fPos - d), u.x), 
+               u.y);
     }
