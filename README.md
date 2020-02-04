@@ -43,3 +43,5 @@ Editor : http://editor.thebookofshaders.com/
 2020.01.21(~ noise-2d noise)
 
 2020.02.02(~ noise-2d noise)
+
+2020.02.04(~ noise-improved noise)

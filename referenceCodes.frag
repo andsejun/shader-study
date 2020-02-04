@@ -227,3 +227,9 @@ float gradientNoise(vec2 st){
                    dot(random2D(iPos + d), fPos - d), u.x), 
                u.y);
     }
+
+// Cubic Hermite Curve.  Same as SmoothStep()
+    y = x * x * (3.0-2.0 * x);
+    
+// Quintic interpolation curve
+    y = x * x * x * (x * (x * 6.-15.) + 10.);
