@@ -97,12 +97,12 @@ void main()
 }
 
 //to draw N-Polygon
-    int N = 7;
-    float a = tan(nSt.x, nSt.y) + 0.2;
-    float b = TWO_PI / float(N);
-    float color = vec3(smoothstep(0.5, 0.51, cos(floor(0.5 + a/b) * b - a) 
-                       * length(nSt.xy)))
-    gl_FragColor = vec4(color, 1.0);
+    float shape(vec2 st, int N){
+        st = st*2.-1.;
+        float a = atan(st.x,st.y)+PI;
+        float r = PI*2.0/float(N);
+        return cos(floor(.5+a/r)*r-a)*length(st);
+    }   
 
 //2D TRS
     mat3 translate(vec2 t){
