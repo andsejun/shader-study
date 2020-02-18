@@ -48,3 +48,8 @@ https://github.com/patriciogonzalezvivo/thebookofshaders/tree/master/04
 
     polar coordinate:
     the coordiante based on radius and angle. 
+
+[Cellular Noise]
+    There is only one catch with for loops in GLSL: the number we are 
+    checking against must be a constant (const). So, no dynamic loops 
+    - the number of iterations to do must be fixed.
