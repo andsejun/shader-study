@@ -210,23 +210,23 @@ vec2 random2D(vec2 st){
 	}
 
 //2-dimensional gradient noise(-1.0 ~ 1.0)
-float gradientNoise(vec2 st){
-    vec2 iPos = floor(st);
-    vec2 fPos = fract(st);
+    float gradientNoise(vec2 st){
+        vec2 iPos = floor(st);
+        vec2 fPos = fract(st);
 
-    vec2 a = vec2(0.0, 0.0);
-	vec2 b = vec2(1.0, 0.0);
-    vec2 c = vec2(0.0, 1.0);
-    vec2 d = vec2(1.0, 1.0);
-    
-    vec2 u = fPos * fPos * (3.0 - 2.0 * fPos);
+        vec2 a = vec2(0.0, 0.0);
+        vec2 b = vec2(1.0, 0.0);
+        vec2 c = vec2(0.0, 1.0);
+        vec2 d = vec2(1.0, 1.0);
+        
+        vec2 u = fPos * fPos * (3.0 - 2.0 * fPos);
 
-    return mix(mix(dot(random2D(iPos + a), fPos - a),
-                   dot(random2D(iPos + b), fPos - b), u.x),
-               mix(dot(random2D(iPos + c), fPos - c),
-                   dot(random2D(iPos + d), fPos - d), u.x), 
-               u.y);
-    }
+        return mix(mix(dot(random2D(iPos + a), fPos - a),
+                    dot(random2D(iPos + b), fPos - b), u.x),
+                mix(dot(random2D(iPos + c), fPos - c),
+                    dot(random2D(iPos + d), fPos - d), u.x), 
+                u.y);
+        }
 
 // Cubic Hermite Curve.  Same as SmoothStep()
     y = x * x * (3.0-2.0 * x);
@@ -335,4 +335,47 @@ float gradientNoise(vec2 st){
         d *= w;
 
         return dot(d, vec4(52.0));
+    }
+
+// Voronoi Algorithm With Border
+    vec2 voronoiWithBorder(in vec2 st){
+        vec2 fPos = fract(st);
+        vec2 iPos = floor(st);
+        
+        vec2 near;
+        vec2 coord;
+
+        // to get center-point distance
+        float dist = 10.0;
+        for(int i = -1; i <= 1; i++){
+            for(int j = -1; j <= 1; j++){
+                vec2 n = vec2(i, j);
+                vec2 p = random2D(iPos + n);
+                vec2 c = n + p - fPos;
+                float d = length(c);
+                
+                if(d < dist){
+                    dist = d;
+                    near = n;
+                    coord = c;
+                }
+            }
+        }
+        
+        // to get center-border distance
+        float borderDist = 10.0;
+        for(int i = -2; i <= 2; i++){
+            for(int j = -2; j <= 2; j++){
+                vec2 n = near + vec2(i, j);
+                vec2 p = random2D(iPos + n);
+                vec2 c = n + p - fPos;
+                
+                // not to select same point
+                if(dot(coord - c, coord - c) > 0.00001)
+                {
+                    borderDist = min(borderDist, dot(0.5*(c + coord), normalize(c - coord)));
+                }
+            }
+        }
+        return vec2(dist, borderDist);
     }
