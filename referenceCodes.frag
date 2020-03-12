@@ -379,3 +379,19 @@ vec2 random2D(vec2 st){
         }
         return vec2(dist, borderDist);
     }
+
+// 1-dimensional wave
+    float amplitude = 1.;
+    float frequency = 1.;
+    y = amplitude * sin(x * frequency);
+    //
+    float amp = 1.0;
+    float fre = 1.0;
+    float t = -u_time;
+
+    y = amp*sin(x*fre + t);
+    y += amp*sin(x*fre*3. + t*1.)*4.5;
+    y += amp*sin(x*fre*4. + t*0.5)*6.;
+    y += amp*sin(x*fre*1. + t*2.)*12.;
+    y += amp*sin(x*fre*12. + t*12.)*3.;
+    y *= 0.05*amp;
